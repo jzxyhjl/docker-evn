@@ -13,6 +13,7 @@ volumes:
   redis:
   mysql5_7:
   mysql5_7_slave:
+  registry:
 
 services:
   historyserver:
@@ -196,3 +197,12 @@ services:
       - "53306:3306"
     volumes:
       - mysql5_7_slave:/var/lib/mysql
+
+  registry:
+      image: library/registry:2.7.1
+      container_name: registry
+      restart: always
+      ports:
+        - "5000:5000"
+      volumes:
+        - registry:/var/lib/registry
